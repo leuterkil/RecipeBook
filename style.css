@@ -1,0 +1,136 @@
+.sub-menu-parent { position: relative; }
+
+.sub-menu {
+  visibility: hidden; /* hides sub-menu */
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-2em);
+  z-index: -1;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+
+.sub-menu-parent:focus .sub-menu,
+.sub-menu-parent:focus-within .sub-menu,
+.sub-menu-parent:hover .sub-menu {
+  visibility: visible; /* shows sub-menu */
+  opacity: 1;
+  z-index: 1;
+  transform: translateY(0%);
+  transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+
+/* presentational */
+body { padding: 2%; font: 18px/1.4 sans-serif; }
+
+nav a { color: #E00; display: block; padding: 0.5em 1em; text-decoration: none;}
+nav a:hover { color: #F55; }
+nav ul,
+nav ul li { list-style-type: none; padding: 0; margin: 0; float: left;}
+
+nav > ul { background: #ddd; text-align: center; }
+nav > ul > li { display: inline-block; border-left: solid 1px #aaa; }
+nav > ul > li:first-child { border-left: none; }
+
+.sub-menu {
+  background: #DDD;
+}
+.title
+{
+  background-color: #ddd;
+  float: left;
+  font-family: sans-serif;
+  font-style: italic;
+  font-size: 36px;
+  color: yellow;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+}
+
+nav .search-container {
+  float: right;
+}
+
+nav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: 1px solid #ccc;
+}
+
+nav .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+nav .search-container button:hover {
+  background: #ccc;
+}
+
+@media screen and (max-width: 600px) {
+  nav .search-container {
+    float: none;
+  }
+  nav a, nav input[type=text], nav .search-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  nav input[type=text] {
+    border: 1px solid #ccc;
+  }
+}
+
+
+.loginform
+{
+  background-color: #bcbcbc;
+  border-radius: 12px;
+  border: 3px solid grey;
+}
+.loginform input[type=text],.loginform input[type=password]
+{
+  font-size: 42px;
+  border-radius: 36px;
+  margin: 12px 12px 12px 12px;
+  text-indent: 17px;
+}
+.loginform input[type=submit],.loginform input[type=button]
+{
+  font-size: 48px;
+  background-color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition-duration: 0.8s;
+  text-align: center;
+  width: 550px;
+  height: 65px;
+  margin-top: 12px;
+}
+
+.loginform input[type=submit]:hover,.loginform input[type=button]:hover
+{
+  background-color: #666;
+  transition-duration: 0.8s;
+}
+
+.loginTitle
+{
+  font-size: 48px;
+  margin-bottom: 12px;
+  color: yellow;
+  text-align: center;
+  text-shadow: 4px 4px purple,8px 8px blue;
+  font-family: sans-serif;
+}
