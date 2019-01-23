@@ -134,3 +134,40 @@ nav .search-container button:hover {
   text-shadow: 4px 4px purple,8px 8px blue;
   font-family: sans-serif;
 }
+#newrecipe
+{
+  background-color:#777;
+  padding: 12px 36px 12px 36px;
+  color : white;
+}
+#newrecipe input[type=submit],.loginform input[type=button]
+{
+  font-size: 24px;
+  background-color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition-duration: 0.8s;
+  text-align: center;
+  width: 150px;
+  height: 45px;
+  margin-top: 12px;
+}
+#newrecipe input[id=add],#newrecipe input[id=remove]
+{
+  background-color: #333;
+  border-radius: 56%;
+  transition-duration: 0.8s;
+  text-align: center;
+  margin-top: 12px;
+}
+#newrecipe input[id=add]:hover,#newrecipe input[id=remove]:hover
+{
+  background-color: #666;
+  transition-duration: 0.8s;
+}
+
+#newrecipe input[type=submit]:hover,.loginform input[type=button]:hover
+{
+  background-color: #666;
+  transition-duration: 0.8s;
+}
