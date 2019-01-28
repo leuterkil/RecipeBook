@@ -2,13 +2,13 @@
 include 'header.html';
 ?>
 <br><br>
-<form id="newrecipe" class="" action="AddRecipe.php" method="post" >
+<form enctype="multipart/form-data" id="newrecipe" class="" action="AddRecipe.php" method="post" >
   <p>Name :</p>
-  <input type="text" name="Name" placeholder="Name..." style="color:black;">
+  <input type="text" name="Name" placeholder="Name..." autocomplete="off" style="color:black;">
   <p>Type :</p>
 <select class="" name="Type" style="color:black;">
   <?php
-  $sql = "select * from type order by name desc";
+  $sql = "select * from type order by typename desc";
   $result=mysqli_query($con,$sql);
   if (!$result) {
     echo mysqli_error($con);
@@ -16,7 +16,7 @@ include 'header.html';
   else {
     while ($row=mysqli_fetch_assoc($result)) {
       $id = $row['id'];
-      $name = $row['name'];
+      $name = $row['typename'];
       ?>
       <option value="<?=$id?>"><?=$name?></option>
       <?php
@@ -31,8 +31,14 @@ include 'header.html';
 <p>Description of Recipe:</p>
 <textarea name="Desc" rows="10" cols="80" placeholder="Description..." style="color:black;"></textarea>
 <p>Photo of Food : </p>
-<input type="file" name="Pic" >
-<p>Time Of Preparation :</p> <input type="text" name="Time" style="color:black;">    ' <br><br>
+<input type="text" name="Photo" style="color:black;" > : Put The URL Of The Picture Here .
+<p>Time Of Preparation :</p> <input type="text" name="Time" style="color:black;" autocomplete="off" >    '<br>
+<p>Do You Want This Recipe to Be Private ?</p>
+<input type="radio" name="Private" value="Yes"> Yes <br>
+<input type="radio" checked name="Private" value="No"> No <br>
+Note : By Checking this recipe to be private other users can't see or save this <br>
+Recipe.This feature can be changed from recipe settings menu.
+ <br><br>
 <center><input type="submit" name="save" value="save"></center>
 </form>
 <?php
