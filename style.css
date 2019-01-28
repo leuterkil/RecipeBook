@@ -175,7 +175,6 @@ nav .search-container button:hover {
 .ListRec
 {
   border-color: red;
-  border-radius: 50%;
   font-family: sans-serif;
   font-size: 24px;
   text-align: center;
@@ -217,4 +216,37 @@ nav .search-container button:hover {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+.editForm
+{
+  background-color: #777;
+  color: white;
+
+}
+.editForm td
+{
+  padding: 12px 12px 12px 12px;
+}
+.editForm input
+{
+  color: black;
+}
+.editForm input[type=submit]
+{
+  font-size: 18px;
+  background-color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition-duration: 0.8s;
+  text-align: center;
+  width: 150px;
+  height: 45px;
+  margin-top: 12px;
+    margin-bottom: 12px;
+}
+.editForm input[type=submit]:hover
+{
+  background-color: #666;
+  transition-duration: 0.8s;
 }
