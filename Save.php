@@ -38,7 +38,7 @@ include 'header.html';
             }
         }
     }
-
+$uid = $_SESSION['uid'];
 $name = $_POST['Name'];
 $sur = $_POST['Surname'];
 $gender = $_POST['Gender'];
@@ -58,7 +58,7 @@ if (!$result) {
   echo mysqli_error($con);
 }
 else {
-  Header("location:Profile.php");
+  Header("location:Profile.php?uid=".$uid);
 }
  ?>
 <?php

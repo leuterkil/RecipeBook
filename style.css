@@ -250,3 +250,25 @@ nav .search-container button:hover {
   background-color: #666;
   transition-duration: 0.8s;
 }
+.ViewForm
+{
+  background-color: grey;
+}
+.follow button
+{
+background-color: #0099cc;
+color: white;
+border-radius: 15%;
+font-size: 24px;
+height: 36px;
+width: 100px;
+}
+.unfollow button
+{
+background-color: #fff;
+color: black;
+border-radius: 15%;
+font-size: 24px;
+height: 36px;
+width: 160px;
+}
