@@ -55,7 +55,7 @@ else {
   $favfood = $row['favorite_foods'];
     $realpho = substr($photo,27);
 if (!isset($photo)) {
-  $photo = "https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg";
+  $realpho = "https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg";
 }
  ?>
  <br><br><br>
@@ -66,8 +66,8 @@ if (!isset($photo)) {
    <h2><?=$username?></h2>
    <span style="color:#ddd;"><?=$name?> <?php echo " " ?> <?=$sur?></span> <br>
    <span style="color:#ddd"> <b><?=$country?></b> </span> <br>
-   Number of Followers : <?=$number?><br>
-   Number of Recipes : <?=$recnum?><br>
+   Number of Followers : <a href="ListOfFollowers.php?uid=<?=$uid?>" style="color:#333;"><?=$number?></a><br>
+   Number of Recipes : <a href="ListOfRecipesOfOtherUser.php?uid=<?=$uid?>" style="color:#333;"><?=$recnum?></a><br>
  </form>
 </center>
 <center><?=$button?></center>

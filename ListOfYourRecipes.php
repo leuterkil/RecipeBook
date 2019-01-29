@@ -4,7 +4,7 @@ include 'sidenav.php';?>
   <div class="main">
 <?php
 $uid = $_SESSION['uid'];
-$sql = "select * from recipe,type where type.id=recipe.type and uid =".$uid;
+$sql = "select recipe.id,typename,name,timeofpreparation,isPrivate from recipe,type where type.id=recipe.type and uid =".$uid;
 $res = mysqli_query($con,$sql);
 if (!$res) {
   echo mysqli_error($con);
@@ -25,15 +25,14 @@ else {
   <th> <i>Type</i> </th>
   <th> <i>Is Private to Other Users</i> </th>
   <th> <i>Go To Recipe</i> </th>
+  <th> <i>Delete Recipe</i> </th>
 </tr>
 
   <?php
   while ($row = mysqli_fetch_assoc($res)) {
-    $_SESSION['recid'] = $row['id'];
+    $id = $row['id'];
     $name = $row['name'];
     $time = $row['timeofpreparation'];
-    $date = $row['dateadded'];
-    $photo = $row['photo'];
     $type = $row['typename'];
     $isPrivate = $row['isPrivate'];
     ?>
@@ -43,8 +42,9 @@ else {
       <td> <center> <?=$type?> </center> </td>
       <td> <center><?=$isPrivate?></center></td>
       <td> <center> <form class="" action="Recipe.php" method="get">
-        <button type="submit" name="recipe" value="<?=$_SESSION['recid']?>">Go To Recipe</button>
+        <button type="submit" name="recipe" value="<?=$id?>">Go To Recipe</button>
       </form> </center> </td>
+      <td> <center> <a href="DeleteRecipe.php?rid=<?=$id?>"> <i class="fa fa-trash" style="color:red;"></i> </a> </center></td>
     </tr>
     <?php
   }

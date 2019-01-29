@@ -9,11 +9,51 @@ if (key_exists("type",$_GET)) {
 }
 elseif (key_exists("search",$_GET)) {
   $andsql = " and recipe.name like '".$_GET['search']."%'";
+  $sqlusers = "Select * from users where username Like '".$_GET['search']."%'";
+  $resusers = mysqli_query($con,$sqlusers);
+  if (!$resusers) {
+    echo mysqli_error($con);
+
+  }
+  else {
+    if (mysqli_affected_rows($con)==0) {
+      echo "<br><br><br>
+        <h1>Users</h1><br>There is no any user with your search criteria";
+    }
+    else {
+
+    ?>
+    <br><br><br>
+    <h1>Users</h1>
+    <table border="5" class="ListRec">
+      <tr>
+        <th><center>Prof Photo </center></th>
+        <th><center>Username</center></th>
+      </tr>
+    <?php
+    while ($row = mysqli_fetch_assoc($resusers)) {
+    $userid = $row['id'];
+    $photo = $row['prophoto'];
+    $realpho = substr($photo,27);
+    $username = $row['username'];
+    if (!isset($photo)) {
+      $realpho = "https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg";
+    }
+    ?>
+    <tr>
+      <td> <img src="<?=$realpho?>" alt="No Photo" width="100" height="100"> </td>
+      <td> <a href="Profile.php?uid=<?=$userid?>"><?=$username?></a> </td>
+    </tr>
+    <?php
+    }
+    ?></table>  <?php
+  }
+}
 }
 else {
   $andsql = "";
 }
-$sql = "select * from users,recipe,type where users.id=recipe.uid and type.id=recipe.type and isPrivate='No'".$andsql;
+$sql = "select recipe.uid,recipe.id,users.username,recipe.name,timeofpreparation,typename,isPrivate from users,recipe,type where users.id=recipe.uid and type.id=recipe.type and isPrivate='No'".$andsql;
 $res = mysqli_query($con,$sql);
 if (!$res) {
   echo mysqli_error($con);
@@ -21,11 +61,13 @@ if (!$res) {
 else {
   if (mysqli_affected_rows($con)==0) {
 
-    echo "<br><br><br>There is no any recipe with your search criteria or there is no recipe in database";
+    echo "<br><br><br>
+      <h1>Recipes</h1><br>There is no any recipe with your search criteria or there is no recipe in database";
   }
   else{
   ?>
   <br><br><br>
+  <h1>Recipes</h1>
   <table border="10" class="ListRec">
 
 <tr >
@@ -41,8 +83,6 @@ else {
     $_SESSION['recid'] = $row['id'];
     $name = $row['name'];
     $time = $row['timeofpreparation'];
-    $date = $row['dateadded'];
-    $photo = $row['photo'];
     $type = $row['typename'];
     $isPrivate = $row['isPrivate'];
     $user = $row['username'];
