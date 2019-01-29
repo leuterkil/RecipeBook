@@ -1,7 +1,10 @@
 <?php include 'connection.php';
 include 'header.html';
-    $uploadDirectory = "C:/xampp/htdocs/RecipeBook/profimages/";
-
+$uid = $_SESSION['uid'];
+    $uploadDirectory = "C:/xampp/htdocs/RecipeBook/profimages/".$uid."/";
+if (!file_exists($uploadDirectory)) {
+  mkdir($uploadDirectory,0777,true);
+}
     $errors = []; // Store all foreseen and unforseen errors here
 
     $fileExtensions = ['jpeg','jpg','png']; // Get all the file extensions
@@ -22,6 +25,9 @@ include 'header.html';
 
         if ($fileSize > 2000000) {
             $errors[] = "This file is more than 2MB. Sorry, it has to be less than or equal to 2MB";
+        }
+        if (file_exists($fileName)) {
+          $uploadPath=$uploadPath."(1)";
         }
 
         if (empty($errors)) {

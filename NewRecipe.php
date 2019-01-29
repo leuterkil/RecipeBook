@@ -31,7 +31,7 @@ include 'header.html';
 <p>Description of Recipe:</p>
 <textarea name="Desc" rows="10" cols="80" placeholder="Description..." style="color:black;"></textarea>
 <p>Photo of Food : </p>
-<input type="text" name="Photo" style="color:black;" > : Put The URL Of The Picture Here .
+<input type="file" name="myfile" style="color:black;" >
 <p>Time Of Preparation :</p> <input type="text" name="Time" style="color:black;" autocomplete="off" >    '<br>
 <p>Do You Want This Recipe to Be Private ?</p>
 <input type="radio" name="Private" value="Yes"> Yes <br>
