@@ -3,8 +3,10 @@ include 'connection.php';
 include 'header.html';
 $id = $_GET['recipe'];
 $uid = $_SESSION['uid'];
+$sqlyourdetails="select * from users where id=".$uid;
 $sql = "select * from recipe,type where recipe.id=".$id;
 $sqlinc = "select name from ingredients where recipe=".$id;
+$sqlcomment = "select prophoto,dateadd,comm from comments,users where users.id=comments.userid and recipeid=".$id." order by dateadd desc";
 $result = mysqli_query($con,$sql);
 $resinc = mysqli_query($con,$sqlinc);
 $sqlfav = "select * from favorite where uid= ".$_SESSION['uid']." and recipe_id = ".$id;
@@ -63,14 +65,14 @@ else {
 Number Of Favorites : <a href="ListOfFav.php?rid=<?=$id?>"><span style="color:#333;"><?=$numberoffav?></span></a>
 </center>
 <h3>Ingredients:</h3>
-<table border="1">
+<table border="1" class="ingredientsView">
   <tr>
     <td>
 <?php
 $counter = 1;
 while ($row=mysqli_fetch_assoc($resinc)) {
   $name = $row['name'];
-  echo "<span style=color:white;>".$counter.". ".$name."</span><br>";
+  echo $counter.". ".$name."<br>";
   $counter++;
 }
 ?>
@@ -78,15 +80,15 @@ while ($row=mysqli_fetch_assoc($resinc)) {
 </tr>
 </table>
 <br><br>
- <h3>Description:</h3>
-<table border="1">
+ <center><h3>Description:</h3></center>
+<table border="1" class="descView">
   <tr>
-    <td> <span style="color:white;"> <?=$desc?></span> </td>
+    <td> <textarea name="name" rows="8" cols="130" readonly style="background-color:inherit;"><?=$desc?></textarea></td>
   </tr>
 </table>
 <center>
   Time Of Preparation : <br>
-  <span style="font-size:48px;color:white;"><?=$timeofpreparation?>'</span>
+  <span class="timeofpreparation"><?=$timeofpreparation?>'</span>
 </center>
 </form>
 <form  action="EditRecipe.php" method="get" style="background-color:grey;float:right;">
@@ -97,5 +99,42 @@ while ($row=mysqli_fetch_assoc($resinc)) {
 </form>
 <?php
 }}
+$resuser = mysqli_query($con,$sqlyourdetails);
+$rowuser = mysqli_fetch_assoc($resuser);
+$photo = $rowuser['prophoto'];
+$name = $rowuser['name'];
+$sur = $rowuser['surname'];
+$realpho = substr($photo,27);
+?>
+<h3>Leave A Comment For Recipe</h3>
+<form class="" action="AddComment.php" method="post">
+  <br>
+  <table border="1" class="AddComment">
+    <tr>
+      <td><img src="<?=$realpho?>" alt="No Photo" width="64" height="64"> <textarea name="comment" rows="4" cols="50" placeholder="Leave A Comment..." ></textarea><br>
+        <b> <button type="submit" name="Recipe" value="<?=$id?>" >Post</button> </b>
+       </td>
+    </tr>
+  </table>
+</form>
+<br><br>
+<table class="AddComment" border="1">
+<?php
+$rescomm = mysqli_query($con,$sqlcomment);
+while ($rowcomm=mysqli_fetch_assoc($rescomm)) {
+  $comment = $rowcomm['comm'];
+  $prophoto =$rowcomm['prophoto'];
+  $realphoto = substr($prophoto,27);
+  ?>
+<tr>
+  <td> <img src="<?=$realphoto?>" alt="No Photo" height="64" width="64">
+    <b><?=$name?> <?=$sur?></b><br>
+     <textarea name="name" rows="4" cols="50" readonly style="background-color:inherit;resize:none;float:right;margin:0px 0px 20px 70px;"  ><?=$comment?></textarea> </td>
+</tr>
+  <?php
+}
+?>
+</table>
+<?php
 include 'footer.html';
  ?>

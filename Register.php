@@ -82,7 +82,8 @@ elseif (strlen($pass)<6)
   return;
 }
 else {
-  $sql = "insert into users (name,surname,username,PASSWORD)values('".$name."','".$surname."','".$username."',sha('".$pass."'))";
+  $photo = "https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg";
+  $sql = "insert into users (name,surname,username,PASSWORD,prophoto)values('".$name."','".$surname."','".$username."',sha('".$pass."'),'".$photo."')";
   $result = mysqli_query($con,$sql);
   if (!$result) {
   }
