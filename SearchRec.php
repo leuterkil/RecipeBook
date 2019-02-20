@@ -87,6 +87,21 @@ else {
     $isPrivate = $row['isPrivate'];
     $user = $row['username'];
     $userid = $row['uid'];
+    $sqlfav = "select * from favorite where uid= ".$uid." and recipe_id=".$_SESSION['recid'];
+    $resfav = mysqli_query($con,$sqlfav);
+    if (!$resfav) {
+      echo mysqli_error($con);
+    }
+    else {
+      if (mysqli_affected_rows($con)==0) {
+        $heart="fa fa-heart-o";
+        $link = "UnFavorite.php?rid".$_SESSION['recid'];
+      }
+      else {
+        $heart = "fa fa-heart";
+        $link = "Favorite.php?rid".$_SESSION['recid'];
+      }
+
     ?>
     <tr>
       <td> <?=$name?></td>
@@ -96,9 +111,11 @@ else {
       <td> <center> <form class="" action="Recipe.php" method="get">
         <button type="submit" name="recipe" value="<?=$_SESSION['recid']?>">Go To Recipe</button>
       </form> </center> </td>
+      <td> <a href="<?=$link?>"> <i class="<?=$heart?>" style="color:red;"></i></a> </td>
     </tr>
     <?php
   }
+}
 }
  ?>
 </table><?php } ?></div>
