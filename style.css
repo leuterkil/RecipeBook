@@ -140,7 +140,7 @@ nav .search-container button:hover {
   padding: 12px 36px 12px 36px;
   color : white;
 }
-#newrecipe input[type=submit],.loginform input[type=button]
+#newrecipe input[type=submit],.loginform input[type=button],#newrecipe button[type=submit]
 {
   font-size: 24px;
   background-color: #333;

@@ -95,11 +95,11 @@ else {
     else {
       if (mysqli_affected_rows($con)==0) {
         $heart="fa fa-heart-o";
-        $link = "UnFavorite.php?rid".$_SESSION['recid'];
+        $link = "Favorite.php?rid=".$_SESSION['recid'];
       }
       else {
         $heart = "fa fa-heart";
-        $link = "Favorite.php?rid".$_SESSION['recid'];
+        $link = "UnFavorite.php?rid".$_SESSION['recid'];
       }
 
     ?>
