@@ -2,6 +2,7 @@
 include 'connection.php';
 include 'header.html';
 $id = $_GET['recipe'];
+$uid = $_SESSION['uid'];
 $sql = "select * from recipe,type where recipe.id=".$id;
 $sqlinc = "select name from ingredients where recipe=".$id;
 $result = mysqli_query($con,$sql);
@@ -34,6 +35,7 @@ else {
   }
   else {
   $row=mysqli_fetch_assoc($result);
+  $user = $row['uid'];
   $name = $row['name'];
   $type = $row['typename'];
   $timeofpreparation = $row['timeofpreparation'];
@@ -43,6 +45,14 @@ else {
   if (!isset($photo)) {
     $realpho = "http://icons.iconarchive.com/icons/mcdo-design/closed-notes/256/Notebook-Recipe-icon.png";
   }
+  if ($user==$uid) {
+    $buttonedit = "<button type=submit name = recipe value =".$id." style=background-color:red;color:white;>Edit</button>";
+    $buttondelete = "<button type=submit name = rid value =".$id." style=background-color:red;color:white;>Delete</button>";
+  }
+  else {
+    $buttonedit="";
+    $buttondelete="";
+  }
 ?>
 <br><br><br>
 <form style="background-color:grey;">
@@ -50,7 +60,7 @@ else {
 
 <h1><?=$name?> <a href="<?=$link?>"> <i class="<?=$heart?>" style="color:red;"></i> </a>  </h1>
 <span style="color:#ddd;"><?=$type?></span><br>
-Number Of Favorites : <a href="ListOfFav.php?rid=<?=$id?>"><span style="color:#333;"><?=$numberoffav?></span></a> 
+Number Of Favorites : <a href="ListOfFav.php?rid=<?=$id?>"><span style="color:#333;"><?=$numberoffav?></span></a>
 </center>
 <h3>Ingredients:</h3>
 <table border="1">
@@ -78,6 +88,12 @@ while ($row=mysqli_fetch_assoc($resinc)) {
   Time Of Preparation : <br>
   <span style="font-size:48px;color:white;"><?=$timeofpreparation?>'</span>
 </center>
+</form>
+<form  action="EditRecipe.php" method="get" style="background-color:grey;float:right;">
+<?=$buttonedit?>
+</form>
+<form class="" action="DeleteRecipe.php" method="get" style="background-color:grey;float:right;">
+<?=$buttondelete?>
 </form>
 <?php
 }}
