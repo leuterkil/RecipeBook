@@ -1,10 +1,10 @@
 <?php include 'connection.php';
 include 'header.html';
-include 'sidenav.php';?>
+?>
   <div class="main">
 <?php
 $uid = $_SESSION['uid'];
-$sql = "select recipe.id,typename,name,timeofpreparation,isPrivate from recipe,type where type.id=recipe.type and uid =".$uid;
+$sql = "select recipe.id,typename,name,photo,timeofpreparation,isPrivate from recipe,type where type.id=recipe.type and uid =".$uid;
 $res = mysqli_query($con,$sql);
 if (!$res) {
   echo mysqli_error($con);
@@ -17,17 +17,7 @@ else {
   else{
   ?>
   <br><br><br>
-  <table border="10" class="ListRec">
-
-<tr >
-  <th> <i>Name</i> </th>
-  <th> <i>Time of Preparation</i> </th>
-  <th> <i>Type</i> </th>
-  <th> <i>Is Private to Other Users</i> </th>
-  <th> <i>Go To Recipe</i> </th>
-  <th> <i>Delete Recipe</i> </th>
-</tr>
-
+  <div class="row">
   <?php
   while ($row = mysqli_fetch_assoc($res)) {
     $id = $row['id'];
@@ -35,20 +25,24 @@ else {
     $time = $row['timeofpreparation'];
     $type = $row['typename'];
     $isPrivate = $row['isPrivate'];
+    $photo = $row['photo'];
+    $real = substr($photo,27);
     ?>
-    <tr>
-      <td> <?=$name?></td>
-      <td> <center> <?=$time?>' </center>  </td>
-      <td> <center> <?=$type?> </center> </td>
-      <td> <center><?=$isPrivate?></center></td>
-      <td> <center> <form class="" action="Recipe.php" method="get">
-        <button type="submit" name="recipe" value="<?=$id?>">Go To Recipe</button>
-      </form> </center> </td>
-      <td> <center> <a href="DeleteRecipe.php?rid=<?=$id?>"> <i class="fa fa-trash" style="color:red;"></i> </a> </center></td>
-    </tr>
+    <div class="column">
+      <div class="content">
+        <img src="<?=$real?>" alt="Mountains" style="width:100%">
+      <h3><?=$name?></h3>
+      <p> <i class="fa fa-clock-o"></i> <b>Time : </b><?=$time?>'</p>
+      <p> <i class="fa fa-tag"></i> <b>Type : </b><?=$type?></p>
+      <p> <i class="fa fa-lock"></i>  <b>Is Private : </b><?=$isPrivate?> </p>
+     <form class="" action="Recipe.php" method="get">
+      <button type="submit" name="recipe" value="<?=$id?>">Go To Recipe <i class="fa fa-arrow-circle-right"></i></button></form>
+       <center> <a href="DeleteRecipe.php?rid=<?=$id?>"> <i class="fa fa-trash" style="color:red;"></i> </a> </center>
+    </div>
+  </div>
     <?php
   }
 }
  ?>
-</table><?php } ?></div>
+</div><?php } ?></div>
 <?php include 'footer.html'; ?>

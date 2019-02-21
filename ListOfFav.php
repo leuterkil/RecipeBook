@@ -3,7 +3,7 @@ include 'connection.php';
 include 'header.html';
 
 $id = $_GET['rid'];
-$sql = "select uid,username,prophoto from favorite,users where users.id=favorite.uid and recipe_id=".$id;
+$sql = "select uid,username,prophoto,name,surname from favorite,users where users.id=favorite.uid and recipe_id=".$id;
 $result = mysqli_query($con,$sql);
 if (!$result) {
   echo mysqli_error($con);
@@ -16,28 +16,29 @@ else {
     ?>
     <br><br><br>
     <h1>List Of Followers</h1>
-    <table border="5" class="ListRec">
-      <tr>
-        <th><center>Prof. Photo</center></th>
-        <th><center>Username</center></th>
-      </tr>
+    <div class="row">
     <?php
     while ($row = mysqli_fetch_assoc($result)) {
       $userid = $row['uid'];
       $username = $row['username'];
       $photo = $row['prophoto'];
+      $name= $row['name'];
+      $sur = $row['surname'];
       $realpho = substr($photo,27);
       if (!isset($photo)) {
         $realpho = "https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg";
       }
       ?>
-      <tr>
-        <td><center> <img src="<?=$realpho?>" alt="No photo" width="100" height="100"></center></td>
-        <td><center> <a href="Profile.php?uid=<?=$userid?>"><?=$username?></a> </center></td>
-      </tr>
+      <div class="column">
+        <div class="content">
+         <center><img src="<?=$realpho?>" alt="No photo" width="256" height="256"></center>
+         <center> <b>Full Name : </b> <?=$name?> <?=$sur?> </center>
+         <center><p> <b>Username :</b> <a href="Profile.php?uid=<?=$userid?>"><?=$username?></a></p></center>
+      </div>
+    </div>
       <?php
     }
-    echo "</table>";
+    echo "</div>";
   }
 }
 include 'footer.html';

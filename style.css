@@ -272,3 +272,153 @@ font-size: 24px;
 height: 36px;
 width: 160px;
 }
+
+.ingredientsView
+{
+  color: #455;
+  font-family: serif;
+  font-style: italic;
+
+}
+.ingredientsView tr
+{
+  background-color: #ffff99;
+}
+.ingredientsView td
+{
+  padding: 0px 18px 8px 12px;
+}
+.ingredientsView h3
+{
+  color:#ff5c33;
+}
+
+.descView
+{
+  color: #455;
+  font-family: serif;
+  font-style: italic;
+
+}
+.descView tr
+{
+  background-color: #ffff99;
+}
+.descView td
+{
+  padding: 8px 12px 8px 12px;
+
+}
+.descView h3
+{
+color:#ff5c33;
+}
+.timeofpreparation
+{
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  font-size: 48px;
+  padding: 8px 8px 8px 8px;
+}
+.AddComment tr{
+  background-color: #bfbfbf;
+  margin: 12px 12px 1px 12px;
+}
+.AddComment td
+{
+  padding: 8px 12px 1px 12px;
+}
+.AddComment img
+{
+  float: left;
+}
+.AddComment textarea
+{
+  margin-left: 30px;
+}
+.AddComment button[type=submit]
+{
+  width: 70px;
+  height: 40px;
+  background-color: #66a3ff;
+  color: white;
+  font-size: 16px;
+  border-style:solid;
+  border-color: white;
+  border-radius: 20%;
+  border-width: medium;
+  margin-bottom: 10px;
+}
+
+.RecipeHeader
+{
+  position: absolute;
+  top:100px;
+  right: 300px;
+
+}
+
+/* Center website */
+.main {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.row {
+  margin: 8px -16px;
+}
+
+/* Add padding BETWEEN each column (if you want) */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after rows */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Content */
+.content {
+  background: inherit;
+  padding: 10px;
+  border-style: solid;
+  border-color: black;
+
+}
+.content img
+{
+  border-radius: 50%;
+}
+.content button
+{
+  border-style: solid;
+  border-color: black;
+  color: white;
+  background-color: red;
+  border-radius: 13%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 900px) {
+  .column {
+    width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}

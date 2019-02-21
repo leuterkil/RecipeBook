@@ -1,6 +1,5 @@
 <?php
 include 'connection.php';
-include 'header.html';
 
 
 $userid = $_SESSION['uid'];
@@ -86,6 +85,4 @@ if (!$finalresult) {
 else {
   Header("location:Recipe.php?recipe=".$recid);
 }
-
-include 'footer.html';
  ?>

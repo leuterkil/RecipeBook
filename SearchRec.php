@@ -1,7 +1,5 @@
 <?php include 'connection.php';
-include 'header.html';
-include 'sidenav.php';?>
-  <div class="main">
+include 'header.html';?>
 <?php
 $uid = $_SESSION['uid'];
 if (key_exists("type",$_GET)) {
@@ -25,35 +23,37 @@ elseif (key_exists("search",$_GET)) {
     ?>
     <br><br><br>
     <h1>Users</h1>
-    <table border="5" class="ListRec">
-      <tr>
-        <th><center>Prof Photo </center></th>
-        <th><center>Username</center></th>
-      </tr>
+    <div class="row">
     <?php
     while ($row = mysqli_fetch_assoc($resusers)) {
     $userid = $row['id'];
     $photo = $row['prophoto'];
+    $name = $row['name'];
+    $sur  = $row['surname'];
     $realpho = substr($photo,27);
     $username = $row['username'];
     if (!isset($photo)) {
       $realpho = "https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg";
     }
     ?>
-    <tr>
-      <td> <img src="<?=$realpho?>" alt="No Photo" width="100" height="100"> </td>
-      <td> <a href="Profile.php?uid=<?=$userid?>"><?=$username?></a> </td>
-    </tr>
+    <div class="column">
+      <div class="content">
+        <center><img src="<?=$realpho?>" alt="No photo" width="100%"></center>
+        <center> <b>Full Name : </b> <?=$name?> <?=$sur?> </center>
+        <center><p> <b>Username :</b> <a href="Profile.php?uid=<?=$userid?>"><?=$username?></a></p></center>
+     </div>
+      </div>
+
     <?php
     }
-    ?></table>  <?php
+    ?></div>  <?php
   }
 }
 }
 else {
   $andsql = "";
 }
-$sql = "select recipe.uid,recipe.id,users.username,recipe.name,timeofpreparation,typename,isPrivate from users,recipe,type where users.id=recipe.uid and type.id=recipe.type and isPrivate='No'".$andsql;
+$sql = "select recipe.uid,recipe.id,photo,users.username,recipe.name,timeofpreparation,typename,isPrivate from users,recipe,type where users.id=recipe.uid and type.id=recipe.type and isPrivate='No'".$andsql;
 $res = mysqli_query($con,$sql);
 if (!$res) {
   echo mysqli_error($con);
@@ -66,24 +66,17 @@ else {
   }
   else{
   ?>
-  <br><br><br>
+  <br><br><br><br>
   <h1>Recipes</h1>
-  <table border="10" class="ListRec">
-
-<tr >
-  <th> <center> <i>Name</i></center> </th>
-  <th> <center><i>Time of Preparation</i></center> </th>
-  <th> <center><i>Type</i></center> </th>
-  <th> <center><i>Author</i></center> </th>
-  <th> <center><i>Go To Recipe</i></center> </th>
-</tr>
-
+  <div class="row">
   <?php
   while ($row = mysqli_fetch_assoc($res)) {
     $_SESSION['recid'] = $row['id'];
     $name = $row['name'];
     $time = $row['timeofpreparation'];
     $type = $row['typename'];
+    $photofood = $row['photo'];
+    $real  = substr($photofood,27);
     $isPrivate = $row['isPrivate'];
     $user = $row['username'];
     $userid = $row['uid'];
@@ -103,20 +96,26 @@ else {
       }
 
     ?>
-    <tr>
-      <td> <?=$name?></td>
-      <td> <center> <?=$time?>' </center>  </td>
-      <td> <center> <?=$type?> </center> </td>
-      <td> <center><a href="Profile.php?uid=<?=$userid?>"><?=$user?></a></center></td>
-      <td> <center> <form class="" action="Recipe.php" method="get">
-        <button type="submit" name="recipe" value="<?=$_SESSION['recid']?>">Go To Recipe</button>
-      </form> </center> </td>
-      <td> <a href="<?=$link?>"> <i class="<?=$heart?>" style="color:red;"></i></a> </td>
-    </tr>
+    <div class="column">
+
+
+    <div class="content">
+      <img src="<?=$real?>" alt="" width="100%">
+      <h3> <?=$name?></h3>
+      <p> <i class="fa fa-clock-o"></i> <b>Time : </b> <?=$time?>' </center>  </p>
+      <p> <i class="fa fa-tag"></i>  <b>Type : </b> <?=$type?> </center> </p>
+      <p> <i class="fa fa-user-circle-o"></i> <b>Author : </b> <a href="Profile.php?uid=<?=$userid?>"><?=$user?></a></center></p>
+      <p>  <form class="" action="Recipe.php" method="get">
+        <button type="submit" name="recipe" value="<?=$_SESSION['recid']?>">Go To Recipe <i class="fa fa-arrow-circle-right"></i> </button>
+      </form></p>
+      <p> <b>Add To Favorites : </b> <a href="<?=$link?>"> <i class="<?=$heart?>" style="color:red;"></i></a> </p>
+    </div>
+  </div>
+
     <?php
   }
 }
 }
  ?>
-</table><?php } ?></div>
+</div><?php } ?></div>
 <?php include 'footer.html'; ?>

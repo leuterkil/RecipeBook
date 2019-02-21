@@ -5,8 +5,10 @@ $id = $_GET['rid'];
 $sql = "delete from recipe where id=".$id;
 $sqlinc = "delete from ingredients where recipe=".$id;
 $sqlfav = "delete from favorite where recipe_id=".$id;
+$sqlcomm = "delete from comments where recipeid=".$id;
 $resinc = mysqli_query($con,$sqlinc);
 $resfav = mysqli_query($con,$sqlfav);
+$resfav = mysqli_query($con,$sqlcomm);
 $result = mysqli_query($con,$sql);
 if (!$result) {
   echo mysqli_error($con);

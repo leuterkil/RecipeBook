@@ -48,8 +48,8 @@ else {
     $realpho = "http://icons.iconarchive.com/icons/mcdo-design/closed-notes/256/Notebook-Recipe-icon.png";
   }
   if ($user==$uid) {
-    $buttonedit = "<button type=submit name = recipe value =".$id." style=background-color:red;color:white;>Edit</button>";
-    $buttondelete = "<button type=submit name = rid value =".$id." style=background-color:red;color:white;>Delete</button>";
+    $buttonedit = "<button type=submit name = recipe value =".$id." style=background-color:red;color:white;border-radius:20%;>Edit</button>";
+    $buttondelete = "<button type=submit name = rid value =".$id." style=background-color:red;color:white;border-radius:20%;>Delete</button>";
   }
   else {
     $buttonedit="";
@@ -57,17 +57,17 @@ else {
   }
 ?>
 <br><br><br>
-<form style="background-color:grey;">
-<center> <img src="<?=$realpho?>" alt="No Photo" width="256" height="256"><br>
-
-<h1><?=$name?> <a href="<?=$link?>"> <i class="<?=$heart?>" style="color:red;"></i> </a>  </h1>
-<span style="color:#ddd;"><?=$type?></span><br>
-Number Of Favorites : <a href="ListOfFav.php?rid=<?=$id?>"><span style="color:#333;"><?=$numberoffav?></span></a>
-</center>
-<h3>Ingredients:</h3>
+<form style="background-color:#c4ff4d;">
+ <img src="<?=$realpho?>" alt="No Photo" width="256" height="256" style="float:left;margin: 18px 100px 20px 12px;"><br><br><br><br><br><br>
+ <img src="https://ya-webdesign.com/images/scrollwork-clipart-underlines-5.png" alt="" height="600" width="1200" style="position:absolute;top:100px;right:100px;"><br><br><br>
+<div class="RecipeHeader"><h1><?=$name?> <a href="<?=$link?>"> <i class="<?=$heart?>" style="color:red;"></i> </a>  </h1>
+<span><b>Category: </b><?=$type?></span><br>
+<b>Number Of Favorites : </b><a href="ListOfFav.php?rid=<?=$id?>"><span style="color:#333;"><?=$numberoffav?></span></a></div>
+<br><br><br><br><br><br>
 <table border="1" class="ingredientsView">
   <tr>
     <td>
+      <h3><u>Ingredients</u></h3>
 <?php
 $counter = 1;
 while ($row=mysqli_fetch_assoc($resinc)) {
@@ -80,10 +80,10 @@ while ($row=mysqli_fetch_assoc($resinc)) {
 </tr>
 </table>
 <br><br>
- <center><h3>Description:</h3></center>
+
 <table border="1" class="descView">
   <tr>
-    <td> <textarea name="name" rows="8" cols="130" readonly style="background-color:inherit;"><?=$desc?></textarea></td>
+    <td><center><h3>Prescription:</h3></center> <textarea name="name" rows="8" cols="130" readonly style="background-color:inherit;"><?=$desc?></textarea></td>
   </tr>
 </table>
 <center>
@@ -91,10 +91,10 @@ while ($row=mysqli_fetch_assoc($resinc)) {
   <span class="timeofpreparation"><?=$timeofpreparation?>'</span>
 </center>
 </form>
-<form  action="EditRecipe.php" method="get" style="background-color:grey;float:right;">
+<form  action="EditRecipe.php" method="get" style="float:right;">
 <?=$buttonedit?>
 </form>
-<form class="" action="DeleteRecipe.php" method="get" style="background-color:grey;float:right;">
+<form class="" action="DeleteRecipe.php" method="get" style="float:right;">
 <?=$buttondelete?>
 </form>
 <?php
