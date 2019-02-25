@@ -1,6 +1,5 @@
 <?php
 include 'connection.php';
-include 'header.html';
 $uidofuse = $_GET['uid'];
 $uid = $_GET['following'];
 $sql = "delete from follows where uid=".$uidofuse." and following=".$uid;
@@ -11,5 +10,4 @@ if (!$result) {
 else {
   Header("location:Profile.php?uid=".$uid);
 }
-include 'footer.html';
  ?>

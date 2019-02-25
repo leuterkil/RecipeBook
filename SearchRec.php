@@ -32,7 +32,7 @@ elseif (key_exists("search",$_GET)) {
     $sur  = $row['surname'];
     $realpho = substr($photo,27);
     $username = $row['username'];
-    if (!isset($photo)) {
+    if ($photo=="https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg") {
       $realpho = "https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg";
     }
     ?>

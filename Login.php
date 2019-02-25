@@ -5,7 +5,7 @@ include 'Index.html';
 $username = $_POST['username'];
 $pass = $_POST['password'];
 
-$sql = "select * from users where username='".$username."'";
+$sql = "select * from users where username='".$username."' and PASSWORD='".sha1($pass)."'";
 $result = mysqli_query($con,$sql);
 
 if ($username=="") {
@@ -36,7 +36,7 @@ else {
   if (mysqli_num_rows($result)==0) {
     ?>
     <script type="text/javascript">
-      document.getElementById('usernamenull').innerHTML = "There is No User with username <?=$username?>";
+      document.getElementById('usernamenull').innerHTML = "Wrong Password Or There is No User with username <?=$username?>";
       document.getElementById('usernamenull').style.color="red";
       document.getElementById('username').style.borderColor="red";
       document.getElementById('username').style.borderStyle="solid";

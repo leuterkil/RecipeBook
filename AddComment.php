@@ -1,6 +1,6 @@
 <?php
 include 'connection.php';
-include 'header.html';
+
 
 $userid = $_SESSION['uid'];
 $recid = $_POST['Recipe'];
@@ -16,6 +16,6 @@ if (!$result) {
 else {
   header("location:Recipe.php?recipe=".$recid);
 }
-
+include 'header.html';
 include 'footer.html';
  ?>

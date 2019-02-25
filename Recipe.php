@@ -1,12 +1,24 @@
 <?php
 include 'connection.php';
 include 'header.html';
+if (!isset($_GET['limit'])) {
+  $limit=5;
+}
+else {
+  if ($_GET['limit']<=0) {
+    $limit=5;
+    $_GET['limit'] = 5;
+  }
+  else {
+    $limit = ($_GET['limit']);
+  }
+}
 $id = $_GET['recipe'];
 $uid = $_SESSION['uid'];
 $sqlyourdetails="select * from users where id=".$uid;
 $sql = "select * from recipe,type where recipe.id=".$id;
 $sqlinc = "select name from ingredients where recipe=".$id;
-$sqlcomment = "select prophoto,dateadd,comm from comments,users where users.id=comments.userid and recipeid=".$id." order by dateadd desc";
+$sqlcomment = "select prophoto,dateadd,comm,name,surname from comments,users where users.id=comments.userid and recipeid=".$id." order by dateadd desc limit ".$limit;
 $result = mysqli_query($con,$sql);
 $resinc = mysqli_query($con,$sqlinc);
 $sqlfav = "select * from favorite where uid= ".$_SESSION['uid']." and recipe_id = ".$id;
@@ -124,17 +136,27 @@ $rescomm = mysqli_query($con,$sqlcomment);
 while ($rowcomm=mysqli_fetch_assoc($rescomm)) {
   $comment = $rowcomm['comm'];
   $prophoto =$rowcomm['prophoto'];
+  $nameother = $rowcomm['name'];
+  $surother = $rowcomm['surname'];
   $realphoto = substr($prophoto,27);
   ?>
 <tr>
   <td> <img src="<?=$realphoto?>" alt="No Photo" height="64" width="64">
-    <b><?=$name?> <?=$sur?></b><br>
+    <b><?=$nameother?> <?=$surother?></b><br>
      <textarea name="name" rows="4" cols="50" readonly style="background-color:inherit;resize:none;float:right;margin:0px 0px 20px 70px;"  ><?=$comment?></textarea> </td>
 </tr>
   <?php
 }
 ?>
 </table>
+<form class="" action="Recipe.php" method="get">
+  <button type="submit" name="recipe" value="<?=$id?>">More comments</button>
+  <input type="hidden" name="limit" value="<?=$limit+5?>">
+</form>
+<form class="" action="Recipe.php" method="get">
+  <button type="submit" name="recipe" value="<?=$id?>">Less comments</button>
+  <input type="hidden" name="limit" value="<?=$limit-5?>">
+</form>
 <?php
 include 'footer.html';
  ?>

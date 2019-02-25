@@ -1,6 +1,5 @@
 <?php
 include 'connection.php';
-include 'header.html';
 $userid = $_SESSION['uid'];
 $uploadDirectory = "C:/xampp/htdocs/RecipeBook/uploads/".$userid."/";
 if (!file_exists($uploadDirectory)) {
@@ -79,5 +78,4 @@ $Private = $_POST['Private'];
    }
  }
  ?>
- <?php
- include 'footer.html'; ?>
+ <?php ?>

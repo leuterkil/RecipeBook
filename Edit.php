@@ -19,7 +19,7 @@ else {
   $country = $row['country'];
   $photo = $row['prophoto'];
   $realpho = substr($photo,27);
-  if (!isset($photo)) {
+  if ($photo=="https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg") {
     $photo = "https://www.umyu.edu.ng/components/com_jsn/assets/img/default.jpg";
   }
   else {
