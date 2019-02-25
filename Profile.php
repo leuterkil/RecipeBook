@@ -62,7 +62,7 @@ if (!isset($photo)) {
  <div class="ViewForm">
 
    <form style="background-color:grey;">
-   <center> <img src="<?=$realpho?>" alt="No Photo" width="256" height="256"><br>
+   <center> <img src="<?=$realpho?>" alt="No Photo" width="256" height="256" style="border-radius:50%;border-style:solid;border-color:red;"><br>
    <h2><?=$username?></h2>
    <span style="color:#ddd;"><?=$name?> <?php echo " " ?> <?=$sur?></span> <br>
    <span style="color:#ddd"> <b><?=$country?></b> </span> <br>

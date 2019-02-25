@@ -1,5 +1,5 @@
 <?php include 'connection.php';
-include 'header.html';
+
 $uid = $_SESSION['uid'];
     $uploadDirectory = "C:/xampp/htdocs/RecipeBook/profimages/".$uid."/";
 if (!file_exists($uploadDirectory)) {
@@ -68,4 +68,4 @@ else {
 }
  ?>
 <?php
-include 'footer.html'; ?>
+ ?>
