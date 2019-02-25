@@ -16,7 +16,7 @@ else {
 $id = $_GET['recipe'];
 $uid = $_SESSION['uid'];
 $sqlyourdetails="select * from users where id=".$uid;
-$sql = "select * from recipe,type where recipe.id=".$id;
+$sql = "select * from recipe,type where recipe.id=".$id." and type.id=recipe.type";
 $sqlinc = "select name from ingredients where recipe=".$id;
 $sqlcomment = "select prophoto,dateadd,comm,name,surname from comments,users where users.id=comments.userid and recipeid=".$id." order by dateadd desc limit ".$limit;
 $result = mysqli_query($con,$sql);
