@@ -1,7 +1,6 @@
 <?php include 'connection.php';
 include 'header.html';
 ?>
-  <div class="main">
 <?php
 $uid = $_SESSION['uid'];
 $sql = "select recipe.id,typename,name,photo,timeofpreparation,isPrivate from recipe,type where type.id=recipe.type and uid =".$uid;
@@ -44,5 +43,5 @@ else {
   }
 }
  ?>
-</div><?php } ?></div>
+</div><?php } ?>
 <?php include 'footer.html'; ?>

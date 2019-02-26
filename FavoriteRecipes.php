@@ -41,7 +41,7 @@ There are no recipes yet.
         <p> <i class="fa fa-tag"></i>  <b>Type : </b> <?=$type?> </center> </p>
         <p> <i class="fa fa-user-circle-o"></i> <b>Author : </b> <a href="Profile.php?uid=<?=$user?>"><?=$username?></a></center></p>
         <p>  <form class="" action="Recipe.php" method="get">
-          <button type="submit" name="recipe" value="<?=$_SESSION['recid']?>">Go To Recipe <i class="fa fa-arrow-circle-right"></i> </button>
+          <button type="submit" name="recipe" value="<?=$recid?>">Go To Recipe <i class="fa fa-arrow-circle-right"></i> </button>
         </form></p>
         <p> <b>Remove From Favorites : </b> <a href="UnFavorite.php?rid=<?=$recid?>"><i class="fa fa-heart" style="color:red;"></i></a> </p>
       </div>
